@@ -35,8 +35,8 @@ pip install -r requirements.txt
 
 copy .env.example .env      # preencha DB_USER / DB_PASSWORD / SECRET_KEY
 
-flask --app app init-db     # cria o banco, as tabelas e o supervisor "admin" (pede a senha)
-flask --app app run
+flask init-db               # cria o banco, as tabelas e o supervisor "admin" (pede a senha)
+flask run
 ```
 
 Acesse http://127.0.0.1:5000 e entre com `admin` e a senha informada no `init-db`.
