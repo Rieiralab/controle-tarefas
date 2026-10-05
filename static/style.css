@@ -1,0 +1,29 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; background: #f3f4f6; color: #1f2937; }
+header { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; padding: .75rem 1.25rem; background: #1e3a5f; color: #fff; }
+header nav { display: flex; gap: 1rem; flex: 1; }
+header a { color: #dbeafe; text-decoration: none; }
+header a:hover { text-decoration: underline; }
+header form { margin: 0; }
+main { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; }
+.card { background: #fff; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.estreito { max-width: 360px; margin: 4rem auto; }
+.estreito form { display: grid; gap: .75rem; }
+h1 { font-size: 1.3rem; margin: 0 0 1rem; }
+h2 { font-size: 1.1rem; margin: 0 0 1rem; }
+label { display: flex; flex-direction: column; gap: .25rem; font-size: .85rem; color: #4b5563; }
+input, select { font: inherit; padding: .4rem .5rem; border: 1px solid #d1d5db; border-radius: 4px; min-width: 10rem; }
+.linha { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .75rem; margin-bottom: 1rem; }
+fieldset { border: 1px dashed #d1d5db; border-radius: 6px; padding: .75rem; }
+button, .botao { font: inherit; font-size: .9rem; padding: .4rem .9rem; border: 1px solid #d1d5db; border-radius: 4px; background: #fff; color: #1f2937; cursor: pointer; text-decoration: none; display: inline-block; }
+.primario { background: #2563eb; border-color: #2563eb; color: #fff; }
+.perigo { color: #b91c1c; border-color: #fca5a5; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: .5rem; border-bottom: 1px solid #e5e7eb; }
+th { font-size: .8rem; text-transform: uppercase; color: #6b7280; }
+td.acoes { display: flex; gap: .4rem; justify-content: flex-end; }
+td.acoes form { margin: 0; }
+.vazio { color: #6b7280; font-style: italic; }
+.msg { padding: .6rem .9rem; border-radius: 4px; }
+.msg.ok { background: #dcfce7; color: #166534; }
+.msg.erro { background: #fee2e2; color: #991b1b; }

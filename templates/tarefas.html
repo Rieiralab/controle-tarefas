@@ -1,0 +1,94 @@
+{% extends "base.html" %} {% block titulo %}Cadastro de Tarefas{% endblock %} {%
+block conteudo %}
+<section class="card">
+  <h1>
+    {% if tarefa %}Alterar tarefa {{ tarefa.codigo }}{% else %}Nova tarefa{%
+    endif %}
+  </h1>
+  <form method="post" action="{{ url_for('salvar_tarefa') }}" class="linha">
+    <input type="hidden" name="csrf" value="{{ csrf }}" />
+    {% if tarefa %}<input
+      type="hidden"
+      name="codigo"
+      value="{{ tarefa.codigo }}"
+    />{% endif %}
+    <label
+      >Nome
+      <input
+        name="nome"
+        required
+        maxlength="30"
+        value="{{ tarefa.nome if tarefa else '' }}"
+    /></label>
+    <label
+      >Tipo
+      <select name="tipo">
+        {% for k, v in TIPOS.items() %}
+        <option
+          value="{{ k }}"
+          {%
+          if
+          tarefa
+          and
+          tarefa.tipo=""
+          ="k"
+          %}selected{%
+          endif
+          %}
+        >
+          {{ v }}
+        </option>
+        {% endfor %}
+      </select>
+    </label>
+    <button class="primario">Salvar</button>
+    <a class="botao" href="{{ url_for('tarefas') }}">Limpar</a>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Tarefas cadastradas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Usuários</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in lista %}
+      <tr>
+        <td>{{ t.codigo }}</td>
+        <td>{{ t.nome }}</td>
+        <td>{{ TIPOS[t.tipo] }}</td>
+        <td>{{ t.usuarios }}</td>
+        <td class="acoes">
+          <a class="botao" href="{{ url_for('tarefas', editar=t.codigo) }}"
+            >Editar</a
+          >
+          <form
+            method="post"
+            action="{{ url_for('excluir_tarefa', codigo=t.codigo) }}"
+            onsubmit="
+              return confirm(
+                'Excluir a tarefa? Ela será removida de todos os usuários.',
+              );
+            "
+          >
+            <input type="hidden" name="csrf" value="{{ csrf }}" />
+            <button class="perigo">Excluir</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5" class="vazio">Nenhuma tarefa cadastrada.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

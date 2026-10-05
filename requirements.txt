@@ -1,0 +1,4 @@
+Flask>=3.0
+PyMySQL>=1.1
+python-dotenv>=1.0
+cryptography>=42  # necessário para autenticação caching_sha2_password do MySQL 8
