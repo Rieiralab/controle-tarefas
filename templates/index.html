@@ -1,20 +1,34 @@
-{% extends "base.html" %}
-{% block conteudo %}
+{% extends "base.html" %} {% block conteudo %}
 <section class="card">
   <h1>Tarefas do usuário</h1>
   <form method="get" class="linha">
-    <label>Usuário
+    <label
+      >Usuário
       <select name="usuario">
         {% for u in usuarios %}
-        <option value="{{ u.codigo }}" {% if u.codigo == selecionado.codigo %}selected{% endif %}>{{ u.codigo }} - {{ u.nome }}</option>
+        <option
+          value="{{ u.codigo }}"
+          {%
+          if
+          u.codigo=""
+          ="selecionado.codigo"
+          %}selected{%
+          endif
+          %}
+        >
+          {{ u.codigo }} - {{ u.nome }}
+        </option>
         {% endfor %}
       </select>
     </label>
-    <label>Tipo
+    <label
+      >Tipo
       <select name="tipo">
         <option value="">Todos</option>
         {% for k, v in TIPOS.items() %}
-        <option value="{{ k }}" {% if k == tipo %}selected{% endif %}>{{ v }}</option>
+        <option value="{{ k }}" {% if k="" ="tipo" %}selected{% endif %}>
+          {{ v }}
+        </option>
         {% endfor %}
       </select>
     </label>
@@ -23,7 +37,16 @@
   </form>
 
   <table>
-    <thead><tr><th>Código</th><th>Nome da tarefa</th><th>Tipo</th>{% if supervisor %}<th></th>{% endif %}</tr></thead>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome da tarefa</th>
+        <th>Tipo</th>
+        {% if supervisor %}
+        <th></th>
+        {% endif %}
+      </tr>
+    </thead>
     <tbody>
       {% for t in tarefas %}
       <tr>
@@ -32,16 +55,23 @@
         <td>{{ TIPOS[t.tipo] }}</td>
         {% if supervisor %}
         <td class="acoes">
-          <form method="post" action="{{ url_for('remover_tarefa_usuario', cod_usuario=selecionado.codigo, cod_tarefa=t.codigo) }}"
-                onsubmit="return confirm('Remover esta tarefa do usuário?')">
-            <input type="hidden" name="csrf" value="{{ csrf }}">
+          <form
+            method="post"
+            action="{{ url_for('remover_tarefa_usuario', cod_usuario=selecionado.codigo, cod_tarefa=t.codigo) }}"
+            onsubmit="return confirm('Remover esta tarefa do usuário?');"
+          >
+            <input type="hidden" name="csrf" value="{{ csrf }}" />
             <button class="perigo">Remover</button>
           </form>
         </td>
         {% endif %}
       </tr>
       {% else %}
-      <tr><td colspan="4" class="vazio">Nenhuma tarefa para {{ selecionado.nome }}.</td></tr>
+      <tr>
+        <td colspan="4" class="vazio">
+          Nenhuma tarefa para {{ selecionado.nome }}.
+        </td>
+      </tr>
       {% endfor %}
     </tbody>
   </table>
@@ -50,13 +80,19 @@
 {% if supervisor %}
 <section class="card">
   <h2>Incluir tarefas para {{ selecionado.nome }}</h2>
-  <form method="post" action="{{ url_for('designar_tarefas', cod_usuario=selecionado.codigo) }}">
-    <input type="hidden" name="csrf" value="{{ csrf }}">
+  <form
+    method="post"
+    action="{{ url_for('designar_tarefas', cod_usuario=selecionado.codigo) }}"
+  >
+    <input type="hidden" name="csrf" value="{{ csrf }}" />
     {% if disponiveis %}
-    <label>Tarefas existentes <small>(Ctrl/Shift para selecionar várias)</small>
+    <label
+      >Tarefas existentes <small>(Ctrl/Shift para selecionar várias)</small>
       <select name="tarefas" multiple size="{{ [disponiveis|length, 8]|min }}">
         {% for t in disponiveis %}
-        <option value="{{ t.codigo }}">{{ t.codigo }} - {{ t.nome }} ({{ TIPOS[t.tipo] }})</option>
+        <option value="{{ t.codigo }}">
+          {{ t.codigo }} - {{ t.nome }} ({{ TIPOS[t.tipo] }})
+        </option>
         {% endfor %}
       </select>
     </label>
@@ -65,15 +101,17 @@
     {% endif %}
     <fieldset class="linha">
       <legend>…ou crie uma nova tarefa e inclua agora</legend>
-      <label>Nome <input name="nova_nome" maxlength="30"></label>
-      <label>Tipo
+      <label>Nome <input name="nova_nome" maxlength="30" /></label>
+      <label
+        >Tipo
         <select name="nova_tipo">
-          {% for k, v in TIPOS.items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}
+          {% for k, v in TIPOS.items() %}
+          <option value="{{ k }}">{{ v }}</option>
+          {% endfor %}
         </select>
       </label>
     </fieldset>
     <button class="primario">Incluir</button>
   </form>
 </section>
-{% endif %}
-{% endblock %}
+{% endif %} {% endblock %}

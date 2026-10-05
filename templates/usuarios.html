@@ -1,22 +1,71 @@
-{% extends "base.html" %}
-{% block titulo %}Cadastro de Usuários{% endblock %}
+{% extends "base.html" %} {% block titulo %}Cadastro de Usuários{% endblock %}
 {% block conteudo %}
 <section class="card">
-  <h1>{% if usuario %}Alterar usuário {{ usuario.codigo }}{% else %}Novo usuário{% endif %}</h1>
+  <h1>
+    {% if usuario %}Alterar usuário {{ usuario.codigo }}{% else %}Novo usuário{%
+    endif %}
+  </h1>
   <form method="post" action="{{ url_for('salvar_usuario') }}" class="linha">
-    <input type="hidden" name="csrf" value="{{ csrf }}">
-    {% if usuario %}<input type="hidden" name="codigo" value="{{ usuario.codigo }}">{% endif %}
-    <label>Nome <input name="nome" required maxlength="50" value="{{ usuario.nome if usuario else '' }}"></label>
-    <label>Direitos
+    <input type="hidden" name="csrf" value="{{ csrf }}" />
+    {% if usuario %}<input
+      type="hidden"
+      name="codigo"
+      value="{{ usuario.codigo }}"
+    />{% endif %}
+    <label
+      >Nome
+      <input
+        name="nome"
+        required
+        maxlength="50"
+        value="{{ usuario.nome if usuario else '' }}"
+    /></label>
+    <label
+      >Direitos
       <select name="direito">
         {% for k, v in DIREITOS.items() %}
-        <option value="{{ k }}" {% if usuario and usuario.direito == k %}selected{% endif %}>{{ v }}</option>
+        <option
+          value="{{ k }}"
+          {%
+          if
+          usuario
+          and
+          usuario.direito=""
+          ="k"
+          %}selected{%
+          endif
+          %}
+        >
+          {{ v }}
+        </option>
         {% endfor %}
       </select>
     </label>
-    <label>Senha <input name="senha" type="password" {% if not usuario %}required{% endif %}
-                        {% if usuario %}placeholder="em branco = manter"{% endif %} autocomplete="new-password"></label>
-    <label>Confirmar senha <input name="confirmacao" type="password" autocomplete="new-password"></label>
+    <label
+      >Senha
+      <input
+        name="senha"
+        type="password"
+        {%
+        if
+        not
+        usuario
+        %}required{%
+        endif
+        %}
+        {%
+        if
+        usuario
+        %}placeholder="em branco = manter"
+        {%
+        endif
+        %}
+        autocomplete="new-password"
+    /></label>
+    <label
+      >Confirmar senha
+      <input name="confirmacao" type="password" autocomplete="new-password"
+    /></label>
     <button class="primario">Salvar</button>
     <a class="botao" href="{{ url_for('usuarios') }}">Limpar</a>
   </form>
@@ -25,7 +74,14 @@
 <section class="card">
   <h2>Usuários cadastrados</h2>
   <table>
-    <thead><tr><th>Código</th><th>Nome</th><th>Direitos</th><th></th></tr></thead>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Direitos</th>
+        <th></th>
+      </tr>
+    </thead>
     <tbody>
       {% for u in lista %}
       <tr>
@@ -33,11 +89,18 @@
         <td>{{ u.nome }}</td>
         <td>{{ DIREITOS[u.direito] }}</td>
         <td class="acoes">
-          <a class="botao" href="{{ url_for('index', usuario=u.codigo) }}">Tarefas</a>
-          <a class="botao" href="{{ url_for('usuarios', editar=u.codigo) }}">Editar</a>
-          <form method="post" action="{{ url_for('excluir_usuario', codigo=u.codigo) }}"
-                onsubmit="return confirm('Excluir o usuário?')">
-            <input type="hidden" name="csrf" value="{{ csrf }}">
+          <a class="botao" href="{{ url_for('index', usuario=u.codigo) }}"
+            >Tarefas</a
+          >
+          <a class="botao" href="{{ url_for('usuarios', editar=u.codigo) }}"
+            >Editar</a
+          >
+          <form
+            method="post"
+            action="{{ url_for('excluir_usuario', codigo=u.codigo) }}"
+            onsubmit="return confirm('Excluir o usuário?');"
+          >
+            <input type="hidden" name="csrf" value="{{ csrf }}" />
             <button class="perigo">Excluir</button>
           </form>
         </td>
