@@ -8,6 +8,8 @@ Supervisores cadastram tarefas e usuários e definem quais tarefas cada um tem. 
 
 Precisa de Python 3.10 ou mais novo e MySQL 8.
 
+Se o comando `py` não for reconhecido, use `python -m venv .venv`. O `py` só vem com o instalador do site python.org; em outras instalações, como a da Microsoft Store, o comando é `python`.
+
 ```powershell
 py -m venv .venv
 .\.venv\Scripts\activate
