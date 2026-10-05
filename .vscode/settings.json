@@ -1,0 +1,11 @@
+{
+  // Templates Jinja: tratar como "jinja-html" e não formatar ao salvar.
+  // Formatadores de HTML (ex.: Prettier) quebram as tags {% %} dentro de atributos.
+  "files.associations": {
+    "**/templates/**/*.html": "jinja-html"
+  },
+  "[jinja-html]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": null
+  }
+}

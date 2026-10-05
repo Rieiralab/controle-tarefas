@@ -24,18 +24,7 @@
       >Direitos
       <select name="direito">
         {% for k, v in DIREITOS.items() %}
-        <option
-          value="{{ k }}"
-          {%
-          if
-          usuario
-          and
-          usuario.direito=""
-          ="k"
-          %}selected{%
-          endif
-          %}
-        >
+        <option value="{{ k }}" {% if usuario and usuario.direito == k %}selected{% endif %}>
           {{ v }}
         </option>
         {% endfor %}
@@ -46,20 +35,7 @@
       <input
         name="senha"
         type="password"
-        {%
-        if
-        not
-        usuario
-        %}required{%
-        endif
-        %}
-        {%
-        if
-        usuario
-        %}placeholder="em branco = manter"
-        {%
-        endif
-        %}
+        {% if usuario %}placeholder="em branco = manter"{% else %}required{% endif %}
         autocomplete="new-password"
     /></label>
     <label

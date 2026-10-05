@@ -1,0 +1,2 @@
+# Templates Jinja: o Prettier quebra as tags {% %} dentro de atributos HTML.
+templates/

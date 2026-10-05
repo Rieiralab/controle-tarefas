@@ -24,18 +24,7 @@ block conteudo %}
       >Tipo
       <select name="tipo">
         {% for k, v in TIPOS.items() %}
-        <option
-          value="{{ k }}"
-          {%
-          if
-          tarefa
-          and
-          tarefa.tipo=""
-          ="k"
-          %}selected{%
-          endif
-          %}
-        >
+        <option value="{{ k }}" {% if tarefa and tarefa.tipo == k %}selected{% endif %}>
           {{ v }}
         </option>
         {% endfor %}

@@ -6,16 +6,7 @@
       >Usuário
       <select name="usuario">
         {% for u in usuarios %}
-        <option
-          value="{{ u.codigo }}"
-          {%
-          if
-          u.codigo=""
-          ="selecionado.codigo"
-          %}selected{%
-          endif
-          %}
-        >
+        <option value="{{ u.codigo }}" {% if u.codigo == selecionado.codigo %}selected{% endif %}>
           {{ u.codigo }} - {{ u.nome }}
         </option>
         {% endfor %}
@@ -26,7 +17,7 @@
       <select name="tipo">
         <option value="">Todos</option>
         {% for k, v in TIPOS.items() %}
-        <option value="{{ k }}" {% if k="" ="tipo" %}selected{% endif %}>
+        <option value="{{ k }}" {% if k == tipo %}selected{% endif %}>
           {{ v }}
         </option>
         {% endfor %}
